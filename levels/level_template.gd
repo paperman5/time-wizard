@@ -11,6 +11,7 @@ var prev
 
 func _process(delta):
 	if is_instance_valid(pt):
-		used_time += (pt.global_position - pt.prev).length() / pt.top_speed
+		var speed = min((pt.global_position - pt.prev).length() / delta, pt.top_speed)
+		used_time += delta * speed / pt.top_speed
 	if is_instance_valid(timer_display):
 		timer_display.set_time(time_limit - used_time)

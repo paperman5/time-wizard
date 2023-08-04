@@ -1,9 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://rusm6h061nwd"]
+[gd_scene load_steps=10 format=3 uid="uid://rusm6h061nwd"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_sy366"]
 [ext_resource type="Script" path="res://addons/smoothing/smoothing_2d.gd" id="2_huk2c"]
 [ext_resource type="Texture2D" uid="uid://n0k3sfpgacv5" path="res://square8.png" id="3_d8c1h"]
 [ext_resource type="PackedScene" uid="uid://cyty8k2r7lcsv" path="res://components/position_tracker.tscn" id="4_ubart"]
+[ext_resource type="Script" path="res://player/statemachine/state_machine.gd" id="5_8a7ea"]
+[ext_resource type="Script" path="res://player/statemachine/idle.gd" id="6_phu6d"]
+[ext_resource type="Script" path="res://player/statemachine/run.gd" id="7_px566"]
+[ext_resource type="Script" path="res://player/statemachine/air.gd" id="8_tt7fy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_20ue3"]
 size = Vector2(8, 8)
@@ -18,8 +22,36 @@ target = NodePath("..")
 [node name="Sprite2D" type="Sprite2D" parent="Smoothing2D"]
 texture = ExtResource("3_d8c1h")
 
+[node name="StateLabel" type="Label" parent="Smoothing2D"]
+unique_name_in_owner = true
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -26.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "IDLE"
+horizontal_alignment = 1
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_20ue3")
 
 [node name="PositionTracker" parent="." instance=ExtResource("4_ubart")]
 top_speed = 300.0
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("5_8a7ea")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("6_phu6d")
+
+[node name="Run" type="Node" parent="StateMachine"]
+script = ExtResource("7_px566")
+
+[node name="Air" type="Node" parent="StateMachine"]
+script = ExtResource("8_tt7fy")
