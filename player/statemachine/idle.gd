@@ -3,6 +3,7 @@ extends PlayerState
 # Upon entering the state, we set the Player node's velocity to zero.
 func enter(msg := {}) -> void:
 	player.state_label.text = "IDLE"
+	player.reset_jumps()
 	if msg.has("jump_buffered"):
 		state_machine.transition_to("Air", {do_jump = true})
 	else:

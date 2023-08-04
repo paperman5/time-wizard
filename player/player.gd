@@ -1,22 +1,28 @@
 class_name Player
 extends CharacterBody2D
 
+@export_category("Max Speed")
 @export var max_speed : float = 120.0
 @export var max_fall_speed : float = 300.0
+@export_category("Accel/Decel")
 @export var gnd_accel : float = 500.0
 @export var gnd_decel : float = 500.0
 @export var air_accel : float = 500.0
 @export var air_decel : float = 50.0
+@export_category("Jumping")
 @export var jump_height : float = 35.0
 @export var jump_apex_time : float = 0.3
 @export var coyote_jump_frames : int = 4
 @export var jump_buffer_frames : int = 4
+@export var default_jumps : int = 2
 
 var jump_speed : float
 var gravity : Vector2
 var _input_ud : Vector2 = Vector2.ZERO
 var _input_lr : Vector2 = Vector2.ZERO
 var deadzone : float = 0.1
+var jumps = default_jumps
+var airtime : float = 0.0
 
 @onready var state_label = get_node("%StateLabel") as Label
 
@@ -31,8 +37,15 @@ func get_input_direction() -> Vector2:
 	var input = Vector2(_input_lr.y - _input_lr.x, _input_ud.y - _input_ud.x)
 	return input if input.length() > deadzone else Vector2.ZERO
 
-func jump():
-	velocity.y = -jump_speed
+func jump(reduce_jumps : bool = true):
+	if jumps > 0:
+		velocity.y = -jump_speed
+		airtime = 0.0
+		if reduce_jumps:
+			jumps -= 1
+
+func reset_jumps():
+	jumps = default_jumps
 
 func _unhandled_input(event):
 	if event.is_action_pressed("move_up"):

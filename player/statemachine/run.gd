@@ -2,14 +2,11 @@ extends PlayerState
 
 func enter(msg := {}) -> void:
 	player.state_label.text = "RUN"
+	player.reset_jumps()
 	if msg.has("jump_buffered"):
 		state_machine.transition_to("Air", {do_jump = true})
 
 func physics_update(delta: float) -> void:
-
-	if not player.is_on_floor():
-		state_machine.transition_to("Air")
-		return
 
 	var input_direction: Vector2 = player.get_input_direction()
 	var accel : Vector2
@@ -28,6 +25,10 @@ func physics_update(delta: float) -> void:
 	player.velocity.y = sign(player.velocity.y) * clamp(abs(player.velocity.y), 0, player.max_fall_speed)
 	
 	player.move_and_slide()
+	
+	if not player.is_on_floor():
+		state_machine.transition_to("Air")
+		return
 
 	if Input.is_action_just_pressed("jump"):
 		state_machine.transition_to("Air", {do_jump = true})

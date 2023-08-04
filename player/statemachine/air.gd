@@ -3,30 +3,33 @@ extends PlayerState
 
 var jump_pressed := false
 var time_since_jump_pressed := 0.0 # for jump buffering
-var airtime : float = 0.0
 var coyote_jump_threshold : float
 var jump_buffer_threshold : float
+var coyote_failed : bool = false
 
 # If we get a message asking us to jump, we jump.
 func enter(msg := {}) -> void:
 	player.state_label.text = "AIR"
+	coyote_failed = false
 	if msg.has("do_jump"):
 		player.jump()
+		coyote_failed = true
 	coyote_jump_threshold = float(player.coyote_jump_frames) / 60.0
 	jump_buffer_threshold = float(player.jump_buffer_frames) / 60.0
 
 func update(delta):
-	var input_direction: Vector2 = player.get_input_direction()
-	
-	airtime += delta
+	player.airtime += delta
 	if jump_pressed:
 		time_since_jump_pressed += delta
+	if player.airtime > coyote_jump_threshold and not coyote_failed:
+		player.jumps -= 1
+		coyote_failed = true
 
 func physics_update(delta: float) -> void:
 	
 	var input_direction: Vector2 = player.get_input_direction()
 	var accel_x : Vector2
-	if not is_equal_approx(input_direction.x, 0.0):
+	if not is_zero_approx(input_direction.x):
 		accel_x = player.air_accel * input_direction
 	else:
 		accel_x = -sign(player.velocity.x) * player.air_decel * Vector2.RIGHT
@@ -40,15 +43,14 @@ func physics_update(delta: float) -> void:
 	
 	# "coyote jumping" for a couple frames after leaving a ledge
 	if Input.is_action_just_pressed("jump"):
-		if airtime <= coyote_jump_threshold:
-			player.jump()
-		else:
-			jump_pressed = true
-			time_since_jump_pressed = 0.0
+		player.jump()
+		coyote_failed = true
+		jump_pressed = true
+		time_since_jump_pressed = 0.0
 
 	# Landing.
 	if player.is_on_floor():
-		airtime = 0.0
+		player.airtime = 0.0
 		var msg = {from_air = true}
 		if time_since_jump_pressed <= jump_buffer_threshold and jump_pressed:
 			msg = {jump_buffered = true}
