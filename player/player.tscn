@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_sy366"]
 [ext_resource type="Script" path="res://addons/smoothing/smoothing_2d.gd" id="2_huk2c"]
-[ext_resource type="Texture2D" uid="uid://n0k3sfpgacv5" path="res://player/square8.png" id="3_g0un6"]
-[ext_resource type="PackedScene" uid="uid://cyty8k2r7lcsv" path="res://components/timer_tracker.tscn" id="4_ubart"]
+[ext_resource type="Texture2D" uid="uid://n0k3sfpgacv5" path="res://square8.png" id="3_d8c1h"]
+[ext_resource type="PackedScene" uid="uid://cyty8k2r7lcsv" path="res://components/position_tracker.tscn" id="4_ubart"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_20ue3"]
 size = Vector2(8, 8)
@@ -16,10 +16,10 @@ script = ExtResource("2_huk2c")
 target = NodePath("..")
 
 [node name="Sprite2D" type="Sprite2D" parent="Smoothing2D"]
-texture = ExtResource("3_g0un6")
+texture = ExtResource("3_d8c1h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_20ue3")
 
-[node name="TimerTracker" parent="." instance=ExtResource("4_ubart")]
+[node name="PositionTracker" parent="." instance=ExtResource("4_ubart")]
 top_speed = 300.0

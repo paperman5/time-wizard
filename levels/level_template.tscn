@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0k0akqnvj75k"]
+
+[ext_resource type="Script" path="res://levels/level_template.gd" id="1_qrqul"]
+[ext_resource type="PackedScene" uid="uid://0b1h0djp1cw7" path="res://components/timer_display.tscn" id="2_gehn1"]
+[ext_resource type="TileSet" uid="uid://bcjxdlrju53pq" path="res://levels/level_tile_set.tres" id="3_flnaw"]
+
+[node name="LevelTemplate" type="Node2D" node_paths=PackedStringArray("timer_display")]
+script = ExtResource("1_qrqul")
+timer_display = NodePath("UI/TimerDisplay")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="TimerDisplay" parent="UI" instance=ExtResource("2_gehn1")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.5
+offset_right = 20.5
+offset_bottom = 26.0
+grow_horizontal = 2
+text = "00:00"
+horizontal_alignment = 1
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("3_flnaw")
+format = 2
+layer_0/name = "terrain"
+layer_0/modulate = Color(0, 0, 0, 1)

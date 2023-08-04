@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://llwvx3lct4cj"]
-
-[ext_resource type="Script" path="res://levels/level_timer.gd" id="1_miytf"]
-
-[node name="LevelTimer" type="Label"]
-text = "00:00"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("1_miytf")
