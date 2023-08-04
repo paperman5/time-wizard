@@ -11,9 +11,30 @@ config_version=5
 [application]
 
 config/name="Mini Jame Gam 20"
-run/main_scene="res://test_level.tscn"
+run/main_scene="res://levels/test_level.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*res://autoloads/game_manager.gd"
+
+[display]
+
+window/size/viewport_width=240
+window/size/viewport_height=320
+window/size/window_width_override=720
+window/size/window_height_override=960
+window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/smoothing/plugin.cfg")
+
+[layer_names]
+
+2d_physics/layer_1="terrain"
+2d_physics/layer_2="player"
 
 [rendering]
 
