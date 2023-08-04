@@ -15,6 +15,10 @@ extends CharacterBody2D
 @export var coyote_jump_frames : int = 4
 @export var jump_buffer_frames : int = 4
 @export var default_jumps : int = 2
+@export_category("Wall Jumping")
+@export var wall_cling_time : float = 0.15
+@export var wall_cling_speed_threshold : float = 250.0
+@export var wall_slide_speed : float = 20.0
 
 var jump_speed : float
 var gravity : Vector2
@@ -23,8 +27,11 @@ var _input_lr : Vector2 = Vector2.ZERO
 var deadzone : float = 0.1
 var jumps = default_jumps
 var airtime : float = 0.0
+var did_walljump : bool = false
 
-@onready var state_label = get_node("%StateLabel") as Label
+@onready var state_label := get_node("%StateLabel") as Label
+@onready var right_raycast := get_node("RightRaycast") as RayCast2D
+@onready var left_raycast := get_node("LeftRaycast") as RayCast2D
 
 func _ready():
 	recalc_physics()

@@ -3,6 +3,7 @@ extends PlayerState
 func enter(msg := {}) -> void:
 	player.state_label.text = "RUN"
 	player.reset_jumps()
+	player.did_walljump = false
 	if msg.has("jump_buffered"):
 		state_machine.transition_to("Air", {do_jump = true})
 
