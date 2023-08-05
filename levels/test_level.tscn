@@ -97,7 +97,7 @@ editor_draw_limits = true
 target = NodePath("../Player")
 
 [node name="Player" parent="." index="3" instance=ExtResource("2_oeuyf")]
-position = Vector2(90, 308)
+position = Vector2(90, 312)
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="." index="4"]
 position = Vector2(48, 201)

@@ -2,6 +2,7 @@ extends PlayerState
 
 func enter(msg := {}) -> void:
 	player.set_state_label("RUN")
+	player.anim.play("walk")
 	player.reset_jumps()
 	player.did_walljump = false
 	if msg.has("jump_buffered"):
@@ -11,8 +12,9 @@ func physics_update(delta: float) -> void:
 
 	var input_direction: Vector2 = player.get_input_direction()
 	var accel : Vector2
-	if not is_equal_approx(input_direction.x, 0.0):
+	if not is_zero_approx(input_direction.x):
 		accel = player.gnd_accel * input_direction
+		player.set_facing(input_direction.x < 0.0)
 	else:
 		accel = -sign(player.velocity.x) * player.gnd_decel * Vector2.RIGHT
 		# handle stopping due to friction

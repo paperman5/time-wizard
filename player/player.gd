@@ -33,6 +33,7 @@ var did_walljump : bool = false
 @onready var state_label := get_node("%StateLabel") as Label
 @onready var right_raycast := get_node("RightRaycast") as RayCast2D
 @onready var left_raycast := get_node("LeftRaycast") as RayCast2D
+@onready var anim := $AnimationPlayer as AnimationPlayer
 
 signal jumped()
 
@@ -59,9 +60,13 @@ func jump(reduce_jumps : bool = true):
 		if reduce_jumps:
 			jumps -= 1
 		jumped.emit()
+		anim.play("jump")
 
 func reset_jumps():
 	jumps = default_jumps
+
+func set_facing(left : bool):
+	%Sprite2D.flip_h = left
 
 func _unhandled_input(event):
 	if event.is_action_pressed("move_left"):

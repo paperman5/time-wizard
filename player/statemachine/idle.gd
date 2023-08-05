@@ -3,6 +3,7 @@ extends PlayerState
 # Upon entering the state, we set the Player node's velocity to zero.
 func enter(msg := {}) -> void:
 	player.set_state_label("IDLE")
+	player.anim.play("idle")
 	player.reset_jumps()
 	player.did_walljump = false
 	if msg.has("jump_buffered"):

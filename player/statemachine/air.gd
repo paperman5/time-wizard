@@ -36,6 +36,7 @@ func physics_update(delta: float) -> void:
 	var accel : Vector2
 	if not is_zero_approx(input_direction.x):
 		accel = player.air_accel * input_direction
+		player.set_facing(input_direction.x < 0.0)
 	else:
 		accel = -sign(player.velocity.x) * player.air_decel * Vector2.RIGHT
 	

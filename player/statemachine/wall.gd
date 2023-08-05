@@ -5,6 +5,7 @@ var side : int = 0
 
 func enter(_msg := {}) -> void:
 	player.set_state_label("WALL")
+	player.anim.play("wall_cling")
 	player.reset_jumps()
 	cling_timer = 0.0
 
