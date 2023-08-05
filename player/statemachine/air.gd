@@ -10,7 +10,7 @@ var from_wall : bool = false
 
 # If we get a message asking us to jump, we jump.
 func enter(msg := {}) -> void:
-	player.state_label.text = "AIR"
+	player.set_state_label("AIR")
 	coyote_failed = false
 	from_wall = false
 	if msg.has("do_jump"):

@@ -50,11 +50,11 @@ text = "OUT OF TIME!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="UI/GameoverScreen/VBoxContainer"]
+[node name="Retry" type="Button" parent="UI/GameoverScreen/VBoxContainer"]
 layout_mode = 2
 text = "Retry"
 
-[node name="Button2" type="Button" parent="UI/GameoverScreen/VBoxContainer"]
+[node name="Quit" type="Button" parent="UI/GameoverScreen/VBoxContainer"]
 layout_mode = 2
 text = "Quit
 "
@@ -64,3 +64,6 @@ tile_set = ExtResource("3_flnaw")
 format = 2
 layer_0/name = "terrain"
 layer_0/modulate = Color(0, 0, 0, 1)
+
+[connection signal="pressed" from="UI/GameoverScreen/VBoxContainer/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="UI/GameoverScreen/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

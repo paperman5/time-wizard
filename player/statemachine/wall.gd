@@ -4,7 +4,7 @@ var cling_timer : float = 0.0
 var side : int = 0
 
 func enter(msg := {}) -> void:
-	player.state_label.text = "WALL"
+	player.set_state_label("WALL")
 	player.reset_jumps()
 	cling_timer = 0.0
 

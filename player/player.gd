@@ -1,7 +1,6 @@
 class_name Player
 extends CharacterBody2D
 
-@export var level : Level
 @export_category("Max Speed")
 @export var max_speed : float = 120.0
 @export var max_fall_speed : float = 300.0
@@ -21,6 +20,7 @@ extends CharacterBody2D
 @export var wall_cling_speed_threshold : float = 250.0
 @export var wall_slide_speed : float = 20.0
 
+var level : Level
 var jump_speed : float
 var gravity : Vector2
 var _input_ud : Vector2 = Vector2.ZERO
@@ -35,6 +35,7 @@ var did_walljump : bool = false
 @onready var left_raycast := get_node("LeftRaycast") as RayCast2D
 
 func _ready():
+	level = GameManager.get_level()
 	recalc_physics()
 	if not is_instance_valid(level):
 		push_warning("Player is not connected to level")
@@ -72,3 +73,7 @@ func _unhandled_input(event):
 		level.manual_advance = true
 	elif event.is_action_released("advance_time"):
 		level.manual_advance = false
+
+func set_state_label(text : String):
+	state_label.text = text
+#	pass

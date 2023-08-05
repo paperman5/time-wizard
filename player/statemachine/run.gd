@@ -1,7 +1,7 @@
 extends PlayerState
 
 func enter(msg := {}) -> void:
-	player.state_label.text = "RUN"
+	player.set_state_label("RUN")
 	player.reset_jumps()
 	player.did_walljump = false
 	if msg.has("jump_buffered"):
