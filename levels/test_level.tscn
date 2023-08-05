@@ -115,9 +115,12 @@ texture = ExtResource("3_o1vvq")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D" index="1"]
 shape = SubResource("RectangleShape2D_nghpv")
 
+[node name="OrganPart" parent="AnimatableBody2D" index="2" instance=ExtResource("7_t0035")]
+position = Vector2(0, -15)
+collision_mask = 2
+
 [node name="AnimatableBody2D2" type="AnimatableBody2D" parent="." index="5"]
 position = Vector2(183, 298)
-metadata/_edit_group_ = true
 
 [node name="Smoothing2D" type="Node2D" parent="AnimatableBody2D2" index="0"]
 script = ExtResource("3_er5pr")
@@ -130,6 +133,10 @@ texture = ExtResource("3_o1vvq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D2" index="1"]
 shape = SubResource("RectangleShape2D_nghpv")
+
+[node name="OrganPart2" parent="AnimatableBody2D2" index="2" instance=ExtResource("7_t0035")]
+position = Vector2(0, -15)
+collision_mask = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
 autoplay = "test_anim"
@@ -144,7 +151,3 @@ libraries = {
 "": SubResource("AnimationLibrary_47lnx")
 }
 script = ExtResource("5_gickh")
-
-[node name="OrganPart" parent="." index="8" instance=ExtResource("7_t0035")]
-position = Vector2(98, 246)
-collision_mask = 2

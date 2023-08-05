@@ -34,8 +34,12 @@ var did_walljump : bool = false
 @onready var right_raycast := get_node("RightRaycast") as RayCast2D
 @onready var left_raycast := get_node("LeftRaycast") as RayCast2D
 
+signal jumped()
+
 func _ready():
 	level = GameManager.get_level()
+	if is_instance_valid(level):
+		jumped.connect(func(): level.add_time(-1.0))
 	recalc_physics()
 	if not is_instance_valid(level):
 		push_warning("Player is not connected to level")
@@ -54,6 +58,7 @@ func jump(reduce_jumps : bool = true):
 		airtime = 0.0
 		if reduce_jumps:
 			jumps -= 1
+		jumped.emit()
 
 func reset_jumps():
 	jumps = default_jumps

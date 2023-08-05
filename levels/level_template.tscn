@@ -12,6 +12,7 @@ timer_display = NodePath("UI/TimerDisplay")
 process_mode = 3
 
 [node name="TimerDisplay" parent="UI" instance=ExtResource("2_gehn1")]
+unique_name_in_owner = true
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -59,6 +60,47 @@ layout_mode = 2
 text = "Quit
 "
 
+[node name="WinScreen" type="Control" parent="UI"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/WinScreen"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/WinScreen/VBoxContainer"]
+layout_mode = 2
+text = "Organ Pieces Collected!"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/WinScreen/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/WinScreen/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Time Left:"
+
+[node name="TimerDisplay2" parent="UI/WinScreen/VBoxContainer/HBoxContainer" instance=ExtResource("2_gehn1")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "00:00"
+
+[node name="Continue" type="Button" parent="UI/WinScreen/VBoxContainer"]
+layout_mode = 2
+text = "Continue"
+
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("3_flnaw")
 format = 2
@@ -67,3 +109,4 @@ layer_0/modulate = Color(0, 0, 0, 1)
 
 [connection signal="pressed" from="UI/GameoverScreen/VBoxContainer/Retry" to="." method="_on_retry_pressed"]
 [connection signal="pressed" from="UI/GameoverScreen/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="UI/WinScreen/VBoxContainer/Continue" to="." method="_on_continue_pressed"]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://dog738rxrlcty"]
+
+[ext_resource type="Script" path="res://components/time_add_marker.gd" id="1_0sox4"]
+
+[node name="TimeAddMarker" type="Label"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 10.0
+offset_right = 20.0
+offset_bottom = 36.0
+grow_horizontal = 2
+text = "1:00"
+horizontal_alignment = 1
+script = ExtResource("1_0sox4")
