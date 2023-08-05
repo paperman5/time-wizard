@@ -14,6 +14,8 @@
 size = Vector2(7.8, 7.8)
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 7
 script = ExtResource("1_sy366")
 
 [node name="Smoothing2D" type="Node2D" parent="."]

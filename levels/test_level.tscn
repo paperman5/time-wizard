@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dddlarn8d828r"]
+[gd_scene load_steps=13 format=3 uid="uid://dddlarn8d828r"]
 
 [ext_resource type="PackedScene" uid="uid://d0k0akqnvj75k" path="res://levels/level_template.tscn" id="1_ijdmg"]
 [ext_resource type="PackedScene" uid="uid://78u0qo5cb1ji" path="res://components/game_camera.tscn" id="2_bre07"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://addons/smoothing/smoothing_2d.gd" id="3_er5pr"]
 [ext_resource type="Texture2D" uid="uid://n0k3sfpgacv5" path="res://square8.png" id="3_o1vvq"]
 [ext_resource type="Script" path="res://components/animation_player_var_speed.gd" id="5_gickh"]
+[ext_resource type="PackedScene" uid="uid://t77eynjeapwt" path="res://collectible/organ_part.tscn" id="7_t0035"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nghpv"]
 size = Vector2(48, 8)
@@ -79,7 +80,7 @@ _data = {
 }
 
 [node name="TestLevel" node_paths=PackedStringArray("track") instance=ExtResource("1_ijdmg")]
-time_limit = 2.0
+time_limit = 60.0
 track = NodePath("Player")
 
 [node name="TileMap" parent="." index="1"]
@@ -130,18 +131,20 @@ texture = ExtResource("3_o1vvq")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D2" index="1"]
 shape = SubResource("RectangleShape2D_nghpv")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6" node_paths=PackedStringArray("level")]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
 autoplay = "test_anim"
 libraries = {
 "": SubResource("AnimationLibrary_47lnx")
 }
 script = ExtResource("5_gickh")
-level = NodePath("..")
 
-[node name="AnimationPlayer2" type="AnimationPlayer" parent="." index="7" node_paths=PackedStringArray("level")]
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="." index="7"]
 autoplay = "test_anim_2"
 libraries = {
 "": SubResource("AnimationLibrary_47lnx")
 }
 script = ExtResource("5_gickh")
-level = NodePath("..")
+
+[node name="OrganPart" parent="." index="8" instance=ExtResource("7_t0035")]
+position = Vector2(98, 246)
+collision_mask = 2

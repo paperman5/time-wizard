@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://t77eynjeapwt"]
+
+[ext_resource type="PackedScene" uid="uid://dp04nxymkv8ou" path="res://collectible/collectible.tscn" id="1_nanjc"]
+[ext_resource type="Script" path="res://collectible/organ_part.gd" id="2_msgum"]
+[ext_resource type="Texture2D" uid="uid://coevmp6w56ri4" path="res://collectible/pipe_01.png" id="3_pkral"]
+
+[node name="OrganPart" groups=["organ_part"] instance=ExtResource("1_nanjc")]
+script = ExtResource("2_msgum")
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource("3_pkral")
+
+[node name="Glow" parent="Sprite" index="0"]
+visible = true

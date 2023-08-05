@@ -3,7 +3,7 @@ extends PlayerState
 var cling_timer : float = 0.0
 var side : int = 0
 
-func enter(msg := {}) -> void:
+func enter(_msg := {}) -> void:
 	player.set_state_label("WALL")
 	player.reset_jumps()
 	cling_timer = 0.0

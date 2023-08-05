@@ -1,9 +1,10 @@
 class_name AnimationPlayerVariableSpeed
 extends AnimationPlayer
 
-@export var level : Level
+var level : Level
 
 func _ready():
+	level = GameManager.get_level()
 	playback_process_mode = AnimationPlayer.ANIMATION_PROCESS_MANUAL
 	if not is_instance_valid(level):
 		push_warning("AnimationPlayerVariableSpeed is not connected to level")

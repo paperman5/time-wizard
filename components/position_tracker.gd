@@ -9,5 +9,5 @@ func _ready():
 	process_priority = 1
 	prev = global_position
 
-func _process(delta):
+func _process(_delta):
 	prev = global_position

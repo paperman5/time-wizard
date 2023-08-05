@@ -11,13 +11,20 @@ var manual_advance : bool = false : set = set_manual_advance
 var time_speed = 0.0
 var level_load_buffer : float = 0.5
 var time_paused := true
+var n_organ_parts : int = 0
+var parts_collected : int = 0
 
 @onready var pt = track.get_node_or_null("PositionTracker") as PositionTracker
 @onready var gameover = get_node("%GameoverScreen") as Control
 
 signal time_advance(delta : float)
+signal part_collected(n_parts : int)
 
 func _ready():
+	for smoothing in get_tree().get_nodes_in_group("smoothing"):
+		smoothing.teleport()
+	for op in get_tree().get_nodes_in_group("organ_part"):
+		n_organ_parts += 1
 	get_tree().create_timer(level_load_buffer).timeout.connect(resume_time)
 
 func _process(delta):
@@ -52,6 +59,10 @@ func pause_time():
 
 func resume_time():
 	time_paused = false
+
+func collect_organ_part():
+	parts_collected += 1
+	part_collected.emit(parts_collected)
 
 func _on_retry_pressed():
 	get_tree().reload_current_scene()

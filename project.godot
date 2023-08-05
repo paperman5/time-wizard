@@ -23,8 +23,8 @@ GameManager="*res://autoloads/game_manager.gd"
 
 window/size/viewport_width=240
 window/size/viewport_height=320
-window/size/window_width_override=480
-window/size/window_height_override=640
+window/size/window_width_override=720
+window/size/window_height_override=960
 window/stretch/mode="canvas_items"
 
 [editor_plugins]
@@ -73,6 +73,7 @@ test_button={
 
 2d_physics/layer_1="terrain"
 2d_physics/layer_2="player"
+2d_physics/layer_3="collectible"
 
 [rendering]
 

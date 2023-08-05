@@ -33,7 +33,6 @@ func update(delta):
 func physics_update(delta: float) -> void:
 	
 	var input_direction: Vector2 = player.get_input_direction()
-	var prev_velocity = player.velocity
 	var accel : Vector2
 	if not is_zero_approx(input_direction.x):
 		accel = player.air_accel * input_direction

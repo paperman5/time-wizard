@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dp04nxymkv8ou"]
+
+[ext_resource type="Script" path="res://collectible/collectible.gd" id="1_ybsyl"]
+[ext_resource type="Texture2D" uid="uid://bl2co8l7qapbo" path="res://collectible/glow.png" id="2_pcehc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jur8s"]
+radius = 4.0
+height = 16.0
+
+[node name="Collectible" type="Area2D" groups=["collectible"]]
+collision_layer = 4
+collision_mask = 6
+script = ExtResource("1_ybsyl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_jur8s")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Glow" type="Sprite2D" parent="Sprite"]
+unique_name_in_owner = true
+visible = false
+show_behind_parent = true
+texture = ExtResource("2_pcehc")

@@ -112,6 +112,7 @@ func _SetProcessing():
 func _enter_tree():
 	# might have been moved
 	_FindTarget()
+	add_to_group("smoothing")
 
 
 func _notification(what):
