@@ -79,7 +79,7 @@ _data = {
 }
 
 [node name="TestLevel" node_paths=PackedStringArray("track") instance=ExtResource("1_ijdmg")]
-time_limit = 60.0
+time_limit = 2.0
 track = NodePath("Player")
 
 [node name="TileMap" parent="." index="1"]

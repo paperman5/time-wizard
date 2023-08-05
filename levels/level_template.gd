@@ -38,13 +38,13 @@ func _process(delta):
 			time_advance.emit(delta_mod)
 	
 	if is_instance_valid(timer_display):
-			timer_display.set_time(time_limit - used_time)
+		timer_display.set_time(time_limit - used_time)
 
 func set_manual_advance(value : bool):
 	manual_advance = value
 
 func show_gameover():
-	timer_display.set_time(0.0)
+	used_time = time_limit
 	gameover.visible = true
 
 func pause_time():
@@ -54,10 +54,11 @@ func resume_time():
 	time_paused = false
 
 func _on_retry_pressed():
-	pass
+	get_tree().reload_current_scene()
 
 func _on_quit_pressed():
-	pass
+	if not OS.has_feature('web'):
+		get_tree().quit()
 
 func _unhandled_input(event):
 	if event.is_action_pressed("test_button"):
