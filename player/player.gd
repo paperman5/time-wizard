@@ -15,6 +15,7 @@ extends CharacterBody2D
 @export var coyote_jump_frames : int = 4
 @export var jump_buffer_frames : int = 4
 @export var default_jumps : int = 2
+@export var air_jump_percent_height : float = 1.0
 @export_category("Wall Jumping")
 @export var wall_cling_time : float = 0.15
 @export var wall_cling_speed_threshold : float = 250.0
@@ -53,9 +54,12 @@ func get_input_direction() -> Vector2:
 	var input = Vector2(_input_lr.y - _input_lr.x, _input_ud.y - _input_ud.x)
 	return input if input.length() > deadzone else Vector2.ZERO
 
-func jump(reduce_jumps : bool = true):
+func jump(reduce_jumps : bool = true, type : String = 'ground'):
 	if jumps > 0:
-		velocity.y = -jump_speed
+		if type == 'ground':
+			velocity.y = -jump_speed
+		elif type == 'air':
+			velocity.y = -jump_speed * air_jump_percent_height
 		airtime = 0.0
 		if reduce_jumps:
 			jumps -= 1
