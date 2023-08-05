@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://t77eynjeapwt" path="res://collectible/organ_part.tscn" id="5_isc87"]
 
 [node name="Level02" node_paths=PackedStringArray("track") instance=ExtResource("1_ye46f")]
+time_limit = 10.5
 track = NodePath("Player")
 next_level = ExtResource("2_4ivru")
 

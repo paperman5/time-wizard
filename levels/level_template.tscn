@@ -20,6 +20,7 @@ offset_left = -20.5
 offset_right = 20.5
 offset_bottom = 26.0
 grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "00:00"
 horizontal_alignment = 1
 
@@ -47,6 +48,7 @@ alignment = 1
 
 [node name="Gameover" type="Label" parent="UI/GameoverScreen/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "OUT OF TIME!"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -82,6 +84,7 @@ alignment = 1
 
 [node name="Label" type="Label" parent="UI/WinScreen/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Organ Pieces Collected!"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/WinScreen/VBoxContainer"]
@@ -90,11 +93,13 @@ alignment = 1
 
 [node name="Label" type="Label" parent="UI/WinScreen/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Time Left:"
 
 [node name="TimerDisplay2" parent="UI/WinScreen/VBoxContainer/HBoxContainer" instance=ExtResource("2_gehn1")]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "00:00"
 
 [node name="Continue" type="Button" parent="UI/WinScreen/VBoxContainer"]
@@ -106,6 +111,9 @@ tile_set = ExtResource("3_flnaw")
 format = 2
 layer_0/name = "terrain"
 layer_0/modulate = Color(0, 0, 0, 1)
+
+[node name="PauseTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="pressed" from="UI/GameoverScreen/VBoxContainer/Retry" to="." method="_on_retry_pressed"]
 [connection signal="pressed" from="UI/GameoverScreen/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

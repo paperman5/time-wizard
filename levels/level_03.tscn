@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjjo4pl5ohidd"]
+[gd_scene load_steps=7 format=3 uid="uid://cjjo4pl5ohidd"]
 
 [ext_resource type="PackedScene" uid="uid://d0k0akqnvj75k" path="res://levels/level_template.tscn" id="1_vqo2n"]
 [ext_resource type="PackedScene" uid="uid://rusm6h061nwd" path="res://player/player.tscn" id="2_iq4gq"]
 [ext_resource type="PackedScene" uid="uid://78u0qo5cb1ji" path="res://components/game_camera.tscn" id="3_0cfrg"]
 [ext_resource type="PackedScene" uid="uid://diimf5x37qpwr" path="res://levels/moving_platform.tscn" id="4_xq8iw"]
+[ext_resource type="PackedScene" uid="uid://br4clqtuu44ek" path="res://collectible/pause_time.tscn" id="5_toy1m"]
+[ext_resource type="PackedScene" uid="uid://t77eynjeapwt" path="res://collectible/organ_part.tscn" id="6_23vua"]
 
 [node name="Level03" node_paths=PackedStringArray("track") instance=ExtResource("1_vqo2n")]
+time_limit = 8.5
 track = NodePath("Player")
 
 [node name="TileMap" parent="." index="1"]
@@ -38,6 +41,13 @@ second_wait_time = 0.25
 
 [node name="Second" parent="MovingPlatform2" index="3"]
 position = Vector2(127, -49)
+
+[node name="PauseTime" parent="." index="7" instance=ExtResource("5_toy1m")]
+position = Vector2(97, 221)
+pause_length = 5.0
+
+[node name="OrganPart" parent="." index="8" instance=ExtResource("6_23vua")]
+position = Vector2(865, -104)
 
 [editable path="MovingPlatform"]
 [editable path="MovingPlatform2"]

@@ -19,6 +19,7 @@ var time_add_marker = preload("res://components/time_add_marker.tscn")
 @onready var pt = track.get_node_or_null("PositionTracker") as PositionTracker
 @onready var gameover = get_node("%GameoverScreen") as Control
 @onready var win_screen = get_node("%WinScreen") as Control
+@onready var pause_timer = get_node("PauseTimer") as Timer
 
 signal time_advance(delta : float)
 signal part_collected(n_parts : int)
@@ -66,8 +67,11 @@ func show_success():
 	%TimerDisplay2.set_time(timer_display.time)
 	win_screen.show()
 
-func pause_time():
+func pause_time(length : float = 0.0):
 	time_paused = true
+	if not is_zero_approx(length):
+		pause_timer.start(length)
+		pause_timer.timeout.connect(resume_time, CONNECT_ONE_SHOT)
 
 func resume_time():
 	time_paused = false

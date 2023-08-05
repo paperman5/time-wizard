@@ -1,12 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://1bd7x4jyufex"]
+[gd_scene load_steps=7 format=3 uid="uid://1bd7x4jyufex"]
 
 [ext_resource type="PackedScene" uid="uid://d0k0akqnvj75k" path="res://levels/level_template.tscn" id="1_8pbyw"]
 [ext_resource type="PackedScene" uid="uid://jbumrw45khlk" path="res://levels/level_02.tscn" id="2_i3353"]
 [ext_resource type="PackedScene" uid="uid://rusm6h061nwd" path="res://player/player.tscn" id="2_itxka"]
 [ext_resource type="PackedScene" uid="uid://78u0qo5cb1ji" path="res://components/game_camera.tscn" id="3_tjo27"]
 [ext_resource type="PackedScene" uid="uid://t77eynjeapwt" path="res://collectible/organ_part.tscn" id="5_f16xo"]
+[ext_resource type="PackedScene" uid="uid://68bnj1cc6mne" path="res://collectible/extra_time.tscn" id="6_cfcpp"]
 
 [node name="Level01" node_paths=PackedStringArray("track") instance=ExtResource("1_8pbyw")]
+time_limit = 5.5
 track = NodePath("Player")
 next_level = ExtResource("2_i3353")
 
@@ -26,3 +28,6 @@ target = NodePath("../Player")
 
 [node name="OrganPart" parent="." index="4" instance=ExtResource("5_f16xo")]
 position = Vector2(670, 330)
+
+[node name="ExtraTime" parent="." index="6" instance=ExtResource("6_cfcpp")]
+position = Vector2(334, 415)
