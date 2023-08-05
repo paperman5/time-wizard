@@ -18,8 +18,10 @@ extends CharacterBody2D
 @export var air_jump_percent_height : float = 1.0
 @export_category("Wall Jumping")
 @export var wall_cling_time : float = 0.15
+@export var wall_detatch_time : float = 0.2
 @export var wall_cling_speed_threshold : float = 250.0
 @export var wall_slide_speed : float = 20.0
+@export var wall_jump_horizontal_speed : float = 90.0
 
 var level : Level
 var jump_speed : float
