@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://dddlarn8d828r"]
+[gd_scene load_steps=14 format=3 uid="uid://dddlarn8d828r"]
 
 [ext_resource type="PackedScene" uid="uid://d0k0akqnvj75k" path="res://levels/level_template.tscn" id="1_ijdmg"]
 [ext_resource type="PackedScene" uid="uid://78u0qo5cb1ji" path="res://components/game_camera.tscn" id="2_bre07"]
 [ext_resource type="PackedScene" uid="uid://rusm6h061nwd" path="res://player/player.tscn" id="2_oeuyf"]
 [ext_resource type="Script" path="res://addons/smoothing/smoothing_2d.gd" id="3_er5pr"]
 [ext_resource type="Texture2D" uid="uid://n0k3sfpgacv5" path="res://square8.png" id="3_o1vvq"]
+[ext_resource type="PackedScene" uid="uid://diimf5x37qpwr" path="res://levels/moving_platform.tscn" id="4_8wnuh"]
 [ext_resource type="Script" path="res://components/animation_player_var_speed.gd" id="5_gickh"]
 [ext_resource type="PackedScene" uid="uid://t77eynjeapwt" path="res://collectible/organ_part.tscn" id="7_t0035"]
 
@@ -99,25 +100,8 @@ target = NodePath("../Player")
 [node name="Player" parent="." index="3" instance=ExtResource("2_oeuyf")]
 position = Vector2(90, 312)
 
-[node name="AnimatableBody2D" type="AnimatableBody2D" parent="." index="4"]
+[node name="AnimatableBody2D" parent="." index="4" instance=ExtResource("4_8wnuh")]
 position = Vector2(48, 201)
-metadata/_edit_group_ = true
-
-[node name="Smoothing2D" type="Node2D" parent="AnimatableBody2D" index="0"]
-script = ExtResource("3_er5pr")
-target = NodePath("..")
-
-[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D/Smoothing2D" index="0"]
-modulate = Color(0.764706, 0, 0, 1)
-scale = Vector2(6, 1)
-texture = ExtResource("3_o1vvq")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D" index="1"]
-shape = SubResource("RectangleShape2D_nghpv")
-
-[node name="OrganPart" parent="AnimatableBody2D" index="2" instance=ExtResource("7_t0035")]
-position = Vector2(0, -15)
-collision_mask = 2
 
 [node name="AnimatableBody2D2" type="AnimatableBody2D" parent="." index="5"]
 position = Vector2(183, 298)

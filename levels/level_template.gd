@@ -4,8 +4,9 @@ extends Node2D
 @export var time_limit : float = 65.0
 @export var timer_display : TimerDisplay
 @export var track : Node2D
-@export var time_accel : float = 3.0
+@export var next_level : PackedScene
 
+var time_accel : float = 3.0
 var used_time : float = 0.0
 var manual_advance : bool = false : set = set_manual_advance
 var time_speed = 0.0
@@ -91,10 +92,11 @@ func _on_quit_pressed():
 		get_tree().quit()
 
 func _on_continue_pressed():
-	pass # Replace with function body.
+	if next_level != null:
+		GameManager.change_scene(next_level)
 
 func _unhandled_input(event):
 	if event.is_action_pressed("test_button"):
-		add_time(1.0)
+		pause_time() if not time_paused else resume_time()
 
 
