@@ -20,7 +20,7 @@ func physics_update(delta):
 		accel.x = player.air_accel * input_direction.x
 		if is_zero_approx(input_direction.x):
 			# Add a small amount of horizontal accel to make it collide with wall
-			accel.x = 10.0 * side
+			player.velocity.x = 100.0 * side
 	
 	# movement & gravity
 	player.velocity += ((player.gravity * float(cling_timer > player.wall_cling_time)) + accel) * delta

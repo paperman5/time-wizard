@@ -1,13 +1,137 @@
-[gd_scene load_steps=3 format=3 uid="uid://dddlarn8d828r"]
+[gd_scene load_steps=11 format=3 uid="uid://dddlarn8d828r"]
 
 [ext_resource type="PackedScene" uid="uid://d0k0akqnvj75k" path="res://levels/level_template.tscn" id="1_ijdmg"]
 [ext_resource type="PackedScene" uid="uid://rusm6h061nwd" path="res://player/player.tscn" id="2_oeuyf"]
+[ext_resource type="Script" path="res://addons/smoothing/smoothing_2d.gd" id="3_er5pr"]
+[ext_resource type="Texture2D" uid="uid://n0k3sfpgacv5" path="res://square8.png" id="3_o1vvq"]
+[ext_resource type="Script" path="res://components/animation_player_var_speed.gd" id="5_gickh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nghpv"]
+size = Vector2(48, 8)
+
+[sub_resource type="Animation" id="Animation_o28fr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatableBody2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(48, 201)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatableBody2D2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(183, 298)]
+}
+
+[sub_resource type="Animation" id="Animation_h3eig"]
+resource_name = "test_anim"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatableBody2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 2.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(48, 201), Vector2(48, 201), Vector2(198, 201), Vector2(198, 201)]
+}
+
+[sub_resource type="Animation" id="Animation_rwrti"]
+resource_name = "test_anim_2"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatableBody2D2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 2.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(183, 298), Vector2(183, 298), Vector2(183, 218), Vector2(183, 218)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_47lnx"]
+_data = {
+"RESET": SubResource("Animation_o28fr"),
+"test_anim": SubResource("Animation_h3eig"),
+"test_anim_2": SubResource("Animation_rwrti")
+}
 
 [node name="TestLevel" node_paths=PackedStringArray("track") instance=ExtResource("1_ijdmg")]
+time_limit = 2.0
 track = NodePath("Player")
 
 [node name="TileMap" parent="." index="1"]
-layer_0/tile_data = PackedInt32Array(2555904, 0, 0, 2490368, 0, 0, 2424832, 0, 0, 2359296, 0, 0, 2293760, 0, 0, 2228224, 0, 0, 2162688, 0, 0, 2097152, 0, 0, 2031616, 0, 0, 1966080, 0, 0, 1900544, 0, 0, 1835008, 0, 0, 1769472, 0, 0, 1703936, 0, 0, 1638400, 0, 0, 1572864, 0, 0, 1507328, 0, 0, 1441792, 0, 0, 1376256, 0, 0, 1310720, 0, 0, 1245184, 0, 0, 1179648, 0, 0, 1114112, 0, 0, 2555905, 0, 0, 2555906, 0, 0, 2555907, 0, 0, 2555908, 0, 0, 2555909, 0, 0, 2555910, 0, 0, 2555911, 0, 0, 2555912, 0, 0, 2555913, 0, 0, 2555914, 0, 0, 2555915, 0, 0, 2555916, 0, 0, 2555917, 0, 0, 2555918, 0, 0, 2555919, 0, 0, 2555920, 0, 0, 2555921, 0, 0, 2555922, 0, 0, 2555923, 0, 0, 2555924, 0, 0, 2555925, 0, 0, 2555926, 0, 0, 2555927, 0, 0, 2555928, 0, 0, 2555929, 0, 0, 2555930, 0, 0, 2555931, 0, 0, 2555932, 0, 0, 2555933, 0, 0, 2490397, 0, 0, 2424861, 0, 0, 2359325, 0, 0, 2293789, 0, 0, 2228253, 0, 0, 2162717, 0, 0, 2097181, 0, 0, 2031645, 0, 0, 1966109, 0, 0, 1900573, 0, 0, 1835037, 0, 0, 1769501, 0, 0, 1703965, 0, 0, 1638429, 0, 0, 1572893, 0, 0, 1507357, 0, 0, 1441821, 0, 0, 1376285, 0, 0, 1310749, 0, 0, 1245213, 0, 0, 1179677, 0, 0, 1114141, 0, 0, 2293761, 0, 0, 2293762, 0, 0, 2293763, 0, 0, 2293764, 0, 0, 2293765, 0, 0, 2293766, 0, 0, 2097161, 0, 0, 2097162, 0, 0, 2097163, 0, 0, 2097164, 0, 0, 2097165, 0, 0, 2097166, 0, 0, 2097170, 0, 0, 2162706, 0, 0, 2228242, 0, 0, 2293778, 0, 0, 2359314, 0, 0, 2097172, 0, 0, 2162708, 0, 0, 2228244, 0, 0, 2293780, 0, 0, 2359316, 0, 0)
+layer_0/tile_data = PackedInt32Array(2555904, 0, 0, 2490368, 0, 0, 2424832, 0, 0, 2359296, 0, 0, 2293760, 0, 0, 2228224, 0, 0, 2162688, 0, 0, 2097152, 0, 0, 2031616, 0, 0, 1966080, 0, 0, 1900544, 0, 0, 1835008, 0, 0, 1769472, 0, 0, 1703936, 0, 0, 1638400, 0, 0, 1572864, 0, 0, 1507328, 0, 0, 1441792, 0, 0, 1376256, 0, 0, 1310720, 0, 0, 1245184, 0, 0, 1179648, 0, 0, 1114112, 0, 0, 2555905, 0, 0, 2555906, 0, 0, 2555907, 0, 0, 2555908, 0, 0, 2555909, 0, 0, 2555910, 0, 0, 2555911, 0, 0, 2555912, 0, 0, 2555913, 0, 0, 2555914, 0, 0, 2555915, 0, 0, 2555916, 0, 0, 2555917, 0, 0, 2555918, 0, 0, 2555919, 0, 0, 2555920, 0, 0, 2555921, 0, 0, 2555922, 0, 0, 2555923, 0, 0, 2555924, 0, 0, 2555925, 0, 0, 2555926, 0, 0, 2555927, 0, 0, 2555928, 0, 0, 2555929, 0, 0, 2555930, 0, 0, 2555931, 0, 0, 2555932, 0, 0, 2555933, 0, 0, 2490397, 0, 0, 2424861, 0, 0, 2359325, 0, 0, 2293789, 0, 0, 2228253, 0, 0, 2162717, 0, 0, 2097181, 0, 0, 2031645, 0, 0, 1966109, 0, 0, 1900573, 0, 0, 1835037, 0, 0, 1769501, 0, 0, 1703965, 0, 0, 1638429, 0, 0, 1572893, 0, 0, 1507357, 0, 0, 1441821, 0, 0, 1376285, 0, 0, 1310749, 0, 0, 1245213, 0, 0, 1179677, 0, 0, 1114141, 0, 0, 2293761, 0, 0, 2293762, 0, 0, 2293763, 0, 0, 2293764, 0, 0, 2293765, 0, 0, 2293766, 0, 0, 2097161, 0, 0, 2097162, 0, 0, 2097163, 0, 0, 2097164, 0, 0, 2097165, 0, 0, 2097166, 0, 0, 1048576, 0, 0, 983040, 0, 0, 917504, 0, 0, 851968, 0, 0, 786432, 0, 0, 720896, 0, 0, 655360, 0, 0, 589824, 0, 0, 524288, 0, 0, 458752, 0, 0, 393216, 0, 0, 327680, 0, 0, 262144, 0, 0, 196608, 0, 0, 131072, 0, 0, 65536, 0, 0, 0, 0, 0, 1048605, 0, 0, 983069, 0, 0, 917533, 0, 0, 851997, 0, 0, 786461, 0, 0, 720925, 0, 0, 655389, 0, 0, 589853, 0, 0, 524317, 0, 0, 458781, 0, 0, 393245, 0, 0, 327709, 0, 0, 262173, 0, 0, 196637, 0, 0, 131101, 0, 0, 65565, 0, 0, 29, 0, 0)
 
-[node name="Player" parent="." index="2" instance=ExtResource("2_oeuyf")]
-position = Vector2(104, 290)
+[node name="Player" parent="." index="2" node_paths=PackedStringArray("level") instance=ExtResource("2_oeuyf")]
+position = Vector2(90, 308)
+level = NodePath("..")
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="." index="3"]
+position = Vector2(48, 201)
+metadata/_edit_group_ = true
+
+[node name="Smoothing2D" type="Node2D" parent="AnimatableBody2D" index="0"]
+script = ExtResource("3_er5pr")
+target = NodePath("..")
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D/Smoothing2D" index="0"]
+modulate = Color(0.764706, 0, 0, 1)
+scale = Vector2(6, 1)
+texture = ExtResource("3_o1vvq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D" index="1"]
+shape = SubResource("RectangleShape2D_nghpv")
+
+[node name="AnimatableBody2D2" type="AnimatableBody2D" parent="." index="4"]
+position = Vector2(183, 298)
+metadata/_edit_group_ = true
+
+[node name="Smoothing2D" type="Node2D" parent="AnimatableBody2D2" index="0"]
+script = ExtResource("3_er5pr")
+target = NodePath("..")
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D2/Smoothing2D" index="0"]
+modulate = Color(0.764706, 0, 0, 1)
+scale = Vector2(6, 1)
+texture = ExtResource("3_o1vvq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D2" index="1"]
+shape = SubResource("RectangleShape2D_nghpv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5" node_paths=PackedStringArray("level")]
+autoplay = "test_anim"
+libraries = {
+"": SubResource("AnimationLibrary_47lnx")
+}
+script = ExtResource("5_gickh")
+level = NodePath("..")
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="." index="6" node_paths=PackedStringArray("level")]
+autoplay = "test_anim_2"
+libraries = {
+"": SubResource("AnimationLibrary_47lnx")
+}
+script = ExtResource("5_gickh")
+level = NodePath("..")

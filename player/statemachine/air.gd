@@ -56,6 +56,9 @@ func physics_update(delta: float) -> void:
 		if from_wall == true:
 			player.did_walljump = true
 	
+	if player.is_on_wall_only():
+		pass
+	
 	if player.is_on_wall_only() \
 				and (not is_zero_approx(input_direction.x) or player.right_raycast.is_colliding() or player.left_raycast.is_colliding()) \
 				and player.velocity.y < player.wall_cling_speed_threshold \

@@ -1,6 +1,7 @@
 class_name Player
 extends CharacterBody2D
 
+@export var level : Level
 @export_category("Max Speed")
 @export var max_speed : float = 120.0
 @export var max_fall_speed : float = 300.0
@@ -35,6 +36,8 @@ var did_walljump : bool = false
 
 func _ready():
 	recalc_physics()
+	if not is_instance_valid(level):
+		push_warning("Player is not connected to level")
 
 func recalc_physics():
 	jump_speed = 2 * jump_height / jump_apex_time
@@ -55,20 +58,17 @@ func reset_jumps():
 	jumps = default_jumps
 
 func _unhandled_input(event):
-	if event.is_action_pressed("move_up"):
-		_input_ud.x = event.get_action_strength("move_up")
-	elif event.is_action_pressed("move_down"):
-		_input_ud.y = event.get_action_strength("move_down")
-	elif event.is_action_pressed("move_left"):
+	if event.is_action_pressed("move_left"):
 		_input_lr.x = event.get_action_strength("move_left")
 	elif event.is_action_pressed("move_right"):
 		_input_lr.y = event.get_action_strength("move_right")
 	
-	elif event.is_action_released("move_up"):
-		_input_ud.x = 0
-	elif event.is_action_released("move_down"):
-		_input_ud.y = 0
 	elif event.is_action_released("move_left"):
 		_input_lr.x = 0
 	elif event.is_action_released("move_right"):
 		_input_lr.y = 0
+	
+	elif event.is_action_pressed("advance_time"):
+		level.manual_advance = true
+	elif event.is_action_released("advance_time"):
+		level.manual_advance = false
