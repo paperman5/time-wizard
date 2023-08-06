@@ -9,6 +9,7 @@ extends CharacterBody2D
 @export var gnd_decel : float = 500.0
 @export var air_accel : float = 500.0
 @export var air_decel : float = 50.0
+@export var landing_decel : float = 1500.0
 @export_category("Jumping")
 @export var jump_height : float = 35.0
 @export var jump_apex_time : float = 0.3

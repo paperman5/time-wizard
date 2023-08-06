@@ -1,5 +1,7 @@
 extends PlayerState
 
+var fric = 0.0
+
 func enter(msg := {}) -> void:
 	player.set_state_label("RUN")
 	player.anim.play("walk")
@@ -7,6 +9,10 @@ func enter(msg := {}) -> void:
 	player.did_walljump = false
 	if msg.has("jump_buffered"):
 		state_machine.transition_to("Air", {do_jump = true})
+	if msg.has("from_air"):
+		fric = player.landing_decel
+	else:
+		fric = player.gnd_decel
 
 func physics_update(delta: float) -> void:
 
@@ -16,7 +22,7 @@ func physics_update(delta: float) -> void:
 		accel = player.gnd_accel * input_direction
 		player.set_facing(input_direction.x < 0.0)
 	else:
-		accel = -sign(player.velocity.x) * player.gnd_decel * Vector2.RIGHT
+		accel = -sign(player.velocity.x) * fric * Vector2.RIGHT
 		# handle stopping due to friction
 		if sign(player.velocity.x + accel.x*delta) * sign(player.velocity.x) < 0: #change in direction
 			if not is_zero_approx(delta):

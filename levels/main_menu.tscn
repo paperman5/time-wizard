@@ -149,6 +149,24 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_3s6kg")
 autoplay = "default"
 
+[node name="Music" type="CheckBox" parent="Menu"]
+layout_mode = 0
+offset_left = 243.0
+offset_top = 380.0
+offset_right = 317.0
+offset_bottom = 411.0
+button_pressed = true
+text = "Music"
+
+[node name="SFX" type="CheckBox" parent="Menu"]
+layout_mode = 0
+offset_left = 329.0
+offset_top = 380.0
+offset_right = 403.0
+offset_bottom = 411.0
+button_pressed = true
+text = "SFX"
+
 [node name="Credits" type="Control" parent="."]
 unique_name_in_owner = true
 visible = false
@@ -403,7 +421,7 @@ text = "OH NO!!! Someone has stolen some parts from my organ!!
 But if I don't cast the spell right now, I will literally EXPLODE!!"
 horizontal_alignment = 1
 
-[node name="Next2" type="Button" parent="Story3"]
+[node name="Next" type="Button" parent="Story3"]
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 1
 anchors_preset = 3
@@ -459,11 +477,11 @@ offset_top = 50.0
 offset_right = 217.0
 offset_bottom = 102.0
 grow_horizontal = 2
-text = "I will use my spell to STOP TIME so I don't explode, but it only works when
-I'm not moving - better get my parts back quick!"
+text = "I will use another spell to STOP TIME so I don't explode, 
+but it only works when I'm not moving - better get my parts back quick!"
 horizontal_alignment = 1
 
-[node name="Next3" type="Button" parent="Story4"]
+[node name="Next" type="Button" parent="Story4"]
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 1
 anchors_preset = 3
@@ -555,9 +573,11 @@ text = "Credits"
 
 [connection signal="pressed" from="Menu/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
+[connection signal="toggled" from="Menu/Music" to="." method="_on_music_toggled"]
+[connection signal="toggled" from="Menu/SFX" to="." method="_on_sfx_toggled"]
 [connection signal="pressed" from="Credits/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="Story1/Next" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Story2/Next" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="Story3/Next2" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="Story4/Next3" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Story3/Next" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Story4/Next" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Ending1/Credits" to="." method="_on_credits_pressed"]

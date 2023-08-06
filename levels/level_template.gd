@@ -67,6 +67,7 @@ func set_manual_advance(value : bool):
 func show_gameover():
 	used_time = time_limit
 	gameover.visible = true
+	%Retry.grab_focus()
 
 func show_success():
 	pause_time()
@@ -74,6 +75,7 @@ func show_success():
 	timer_display.hide()
 	%TimerDisplay2.set_time(timer_display.time)
 	win_screen.show()
+	%Continue.grab_focus()
 
 func pause_time(length : float = 0.0):
 	time_paused = true
@@ -120,5 +122,6 @@ func _unhandled_input(event):
 		pause_time() if not time_paused else resume_time()
 	if event.is_action_pressed("restart"):
 		reload_level()
-
+	if event.is_action_pressed("next_level"):
+		GameManager.change_scene(next_level)
 
