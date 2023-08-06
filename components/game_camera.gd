@@ -15,6 +15,10 @@ func _ready():
 	global_position = target.global_position
 	reset_smoothing()
 	force_update_scroll()
+	if is_instance_valid(target):
+		var o = target.get_node_or_null("Smoothing2D")
+		if o != null:
+			target = o
 
 func _process(delta):
 	if is_instance_valid(target):

@@ -31,6 +31,7 @@ target = NodePath("../Player")
 
 [node name="OrganPart" parent="." index="4" instance=ExtResource("5_f16xo")]
 position = Vector2(683, 318)
+play_collect_sound = false
 pickup_text = "Got a PIPE!"
 
 [node name="ExtraTime" parent="." index="6" instance=ExtResource("6_cfcpp")]

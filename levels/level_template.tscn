@@ -1,19 +1,31 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0k0akqnvj75k"]
+[gd_scene load_steps=8 format=3 uid="uid://d0k0akqnvj75k"]
 
 [ext_resource type="Script" path="res://levels/level_template.gd" id="1_qrqul"]
+[ext_resource type="Theme" uid="uid://bm27tr578c2pr" path="res://theme.tres" id="2_c7rsg"]
 [ext_resource type="PackedScene" uid="uid://0b1h0djp1cw7" path="res://components/timer_display.tscn" id="2_gehn1"]
+[ext_resource type="Texture2D" uid="uid://d2odobwafki6n" path="res://levels/time_pause_hud.png" id="3_ee7jg"]
 [ext_resource type="TileSet" uid="uid://bcjxdlrju53pq" path="res://levels/level_tile_set.tres" id="3_flnaw"]
 [ext_resource type="AudioStream" uid="uid://p5gjmv1lgv2d" path="res://sfx/fanfare-46385.mp3" id="4_a32ih"]
 [ext_resource type="AudioStream" uid="uid://dtuw38hx5ocnm" path="res://sfx/medium-explosion-40472.mp3" id="5_kwndl"]
 
 [node name="LevelTemplate" type="Node2D" node_paths=PackedStringArray("timer_display")]
 script = ExtResource("1_qrqul")
-timer_display = NodePath("UI/VBoxContainer/TimerDisplay")
+timer_display = NodePath("UI/Control/VBoxContainer/HBoxContainer/TimerDisplay")
 
 [node name="UI" type="CanvasLayer" parent="."]
 process_mode = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_c7rsg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -21,31 +33,44 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="UI/VBoxContainer"]
+[node name="Label" type="Label" parent="UI/Control/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Time until EXPLOSION:"
 horizontal_alignment = 1
 
-[node name="TimerDisplay" parent="UI/VBoxContainer" instance=ExtResource("2_gehn1")]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Control/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="TimerDisplay" parent="UI/Control/VBoxContainer/HBoxContainer" instance=ExtResource("2_gehn1")]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme = ExtResource("2_c7rsg")
 theme_override_font_sizes/font_size = 26
 text = "00:00"
 horizontal_alignment = 1
 
-[node name="GameoverScreen" type="Control" parent="UI"]
+[node name="PauseIndicator" type="TextureRect" parent="UI/Control/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 visible = false
-layout_mode = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_ee7jg")
+stretch_mode = 2
+
+[node name="GameoverScreen" type="Control" parent="UI/Control"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/GameoverScreen"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/GameoverScreen"]
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
@@ -57,33 +82,36 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Gameover" type="Label" parent="UI/GameoverScreen/VBoxContainer"]
+[node name="Gameover" type="Label" parent="UI/Control/GameoverScreen/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
 text = "OUT OF TIME!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Retry" type="Button" parent="UI/GameoverScreen/VBoxContainer"]
+[node name="Retry" type="Button" parent="UI/Control/GameoverScreen/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 text = "Retry"
 
-[node name="Quit" type="Button" parent="UI/GameoverScreen/VBoxContainer"]
+[node name="Quit" type="Button" parent="UI/Control/GameoverScreen/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 text = "Quit
 "
 
-[node name="WinScreen" type="Control" parent="UI"]
+[node name="WinScreen" type="Control" parent="UI/Control"]
 unique_name_in_owner = true
-visible = false
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/WinScreen"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/WinScreen"]
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
@@ -93,28 +121,32 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="UI/WinScreen/VBoxContainer"]
+[node name="Label" type="Label" parent="UI/Control/WinScreen/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 21
 text = "Organ Pieces Collected!"
+horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/WinScreen/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Control/WinScreen/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="UI/WinScreen/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="UI/Control/WinScreen/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Time Left:"
 
-[node name="TimerDisplay2" parent="UI/WinScreen/VBoxContainer/HBoxContainer" instance=ExtResource("2_gehn1")]
+[node name="TimerDisplay2" parent="UI/Control/WinScreen/VBoxContainer/HBoxContainer" instance=ExtResource("2_gehn1")]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "00:00"
 
-[node name="Continue" type="Button" parent="UI/WinScreen/VBoxContainer"]
+[node name="Continue" type="Button" parent="UI/Control/WinScreen/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 text = "Continue"
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -132,6 +164,6 @@ stream = ExtResource("4_a32ih")
 [node name="Fail" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_kwndl")
 
-[connection signal="pressed" from="UI/GameoverScreen/VBoxContainer/Retry" to="." method="_on_retry_pressed"]
-[connection signal="pressed" from="UI/GameoverScreen/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="UI/WinScreen/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="UI/Control/GameoverScreen/VBoxContainer/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="UI/Control/GameoverScreen/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="UI/Control/WinScreen/VBoxContainer/Continue" to="." method="_on_continue_pressed"]

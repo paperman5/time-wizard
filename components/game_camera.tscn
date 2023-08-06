@@ -3,4 +3,7 @@
 [ext_resource type="Script" path="res://components/game_camera.gd" id="1_uom14"]
 
 [node name="GameCamera" type="Camera2D"]
+drag_vertical_enabled = true
+drag_top_margin = 0.1
+drag_bottom_margin = 0.1
 script = ExtResource("1_uom14")

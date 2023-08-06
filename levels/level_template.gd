@@ -35,6 +35,7 @@ func _ready():
 	get_tree().create_timer(level_load_buffer).timeout.connect(resume_time)
 	gameover.hide()
 	win_screen.hide()
+	GameManager.state = GameManager.State.PLAYING
 
 func _process(delta):
 	if not time_paused:
@@ -77,12 +78,14 @@ func show_success():
 func pause_time(length : float = 0.0):
 	time_paused = true
 	time_speed = 0.0
+	%PauseIndicator.show()
 	if not is_zero_approx(length):
 		pause_timer.start(length)
 		pause_timer.timeout.connect(resume_time, CONNECT_ONE_SHOT)
 
 func resume_time():
 	time_paused = false
+	%PauseIndicator.hide()
 
 func collect_organ_part(organ_part : OrganPart):
 	parts_collected += 1
@@ -99,19 +102,23 @@ func add_time(amount_sec : float):
 	timer_display.add_child(tam)
 	tam.set_relative_time(amount_sec)
 
-func _on_retry_pressed():
+func reload_level():
 	get_tree().reload_current_scene()
+
+func _on_retry_pressed():
+	reload_level()
 
 func _on_quit_pressed():
 	if not OS.has_feature('web'):
 		get_tree().quit()
 
 func _on_continue_pressed():
-	if next_level != null:
-		GameManager.change_scene(next_level)
+	GameManager.change_scene(next_level)
 
 func _unhandled_input(event):
 	if event.is_action_pressed("test_button"):
 		pause_time() if not time_paused else resume_time()
+	if event.is_action_pressed("restart"):
+		reload_level()
 
 

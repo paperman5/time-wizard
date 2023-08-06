@@ -10,6 +10,7 @@ height = 38.05
 
 [node name="OrganPart" groups=["organ_part"] instance=ExtResource("1_nanjc")]
 script = ExtResource("2_msgum")
+play_collect_sound = true
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CapsuleShape2D_2d6yc")

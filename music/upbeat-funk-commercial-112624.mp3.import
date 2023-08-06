@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/upbeat-funk-commercial-112624.mp3-b264d34067c
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

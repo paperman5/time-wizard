@@ -23,10 +23,17 @@ func _on_play_pressed():
 
 
 func _on_back_pressed():
+	for c in get_children():
+		c.hide()
 	%Menu.show()
-	%Credits.hide()
 
 
 func _on_credits_pressed():
+	for c in get_children():
+		c.hide()
 	%Credits.show()
-	%Menu.hide()
+
+func show_ending():
+	for c in get_children():
+		c.hide()
+	$Ending1.show()

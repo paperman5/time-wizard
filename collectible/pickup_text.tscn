@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://q23uxplodxsi"]
+[gd_scene load_steps=2 format=3 uid="uid://q23uxplodxsi"]
+
+[ext_resource type="Theme" uid="uid://bm27tr578c2pr" path="res://theme.tres" id="1_b6rcj"]
 
 [node name="PickupText" type="Node2D"]
 
@@ -14,8 +16,8 @@ offset_right = 27.0
 offset_bottom = -17.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 9
+theme = ExtResource("1_b6rcj")
+theme_override_font_sizes/font_size = 10
 text = "Pickup Text!"
 
 [node name="Timer" type="Timer" parent="."]

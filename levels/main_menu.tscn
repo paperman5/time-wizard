@@ -1,5 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://cjasr8poh6k2w"]
+[gd_scene load_steps=21 format=3 uid="uid://cjasr8poh6k2w"]
 
+[ext_resource type="Theme" uid="uid://bm27tr578c2pr" path="res://theme.tres" id="1_5jpot"]
 [ext_resource type="Script" path="res://levels/main_menu.gd" id="1_ljjrr"]
 [ext_resource type="PackedScene" uid="uid://1bd7x4jyufex" path="res://levels/level_01.tscn" id="2_7vchw"]
 [ext_resource type="Texture2D" uid="uid://cy00ccpign4pt" path="res://logo.png" id="3_bvpn7"]
@@ -8,9 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://cd747wv1lg0jd" path="res://collectible/stopwatch.png" id="5_t7q0j"]
 [ext_resource type="Texture2D" uid="uid://bulbddbspch2w" path="res://story_background.png" id="7_0om45"]
 [ext_resource type="Texture2D" uid="uid://dux55je6ygqd8" path="res://collectible/wind.png" id="8_cdrqq"]
-
-[sub_resource type="Theme" id="Theme_6s4ls"]
-Label/colors/font_color = Color(0, 0, 0, 1)
+[ext_resource type="Texture2D" uid="uid://bbeparltukhfg" path="res://ending_background.png" id="9_lhiq5"]
+[ext_resource type="Texture2D" uid="uid://s16tcejxl5ht" path="res://player/wizard_color.png" id="10_dnv77"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xfoom"]
 atlas = ExtResource("4_f0ojw")
@@ -56,6 +56,28 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_24gkp"]
+atlas = ExtResource("10_dnv77")
+region = Rect2(0, 0, 33, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xm6xh"]
+atlas = ExtResource("10_dnv77")
+region = Rect2(33, 0, 33, 54)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7kbss"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_24gkp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xm6xh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -63,7 +85,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_6s4ls")
+theme = ExtResource("1_5jpot")
 script = ExtResource("1_ljjrr")
 first_level = ExtResource("2_7vchw")
 
@@ -142,7 +164,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 22.0
+offset_top = 17.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -153,7 +175,8 @@ horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="Credits/VBoxContainer"]
 layout_mode = 2
-text = "Josh Carlson (paperish - https://paperish.itch.io)"
+text = "Josh Carlson (paperish - https://paperish.itch.io)
+Additional Level Design by Asheley Carlson"
 horizontal_alignment = 1
 
 [node name="Label5" type="Label" parent="Credits/VBoxContainer"]
@@ -180,10 +203,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -38.0
-offset_top = -216.0
-offset_right = 46.0
-offset_bottom = -190.0
+offset_left = -37.0
+offset_top = -195.0
+offset_right = 47.0
+offset_bottom = -169.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Made With"
@@ -195,10 +218,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -128.0
-offset_top = -205.0
-offset_right = 2405.0
-offset_bottom = 819.0
+offset_left = -127.0
+offset_top = -184.0
+offset_right = 2406.0
+offset_bottom = 840.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(0.1, 0.1)
@@ -212,22 +235,22 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -22.0
-offset_top = -90.0
-offset_right = 23.0
-offset_bottom = -59.0
+offset_left = -61.0
+offset_top = -69.0
+offset_right = 64.0
+offset_bottom = -38.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "Back"
+text = "Main Menu"
 
 [node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="Credits"]
-position = Vector2(540, 344)
+position = Vector2(541, 365)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_4qstj")
 autoplay = "default"
 
 [node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="Credits"]
-position = Vector2(99, 355)
+position = Vector2(100, 376)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_3s6kg")
 autoplay = "default"
@@ -456,6 +479,80 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Next"
 
+[node name="Ending1" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Ending1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_lhiq5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Ending1"]
+position = Vector2(484, 375)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7kbss")
+autoplay = "default"
+flip_h = true
+
+[node name="Label" type="Label" parent="Ending1"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -217.0
+offset_top = 50.0
+offset_right = 217.0
+offset_bottom = 102.0
+grow_horizontal = 2
+text = "I knew I could do it! A wizard is never late, after all.
+And with the organ restored, my spell is complete!
+My hat is the coolest in the land!"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Ending1"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -87.0
+offset_top = -36.0
+offset_right = 88.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 20
+text = "THANKS FOR PLAYING!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Credits" type="Button" parent="Ending1"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -92.0
+offset_top = -41.0
+offset_right = -17.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Credits"
+
 [connection signal="pressed" from="Menu/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="Credits/Back" to="." method="_on_back_pressed"]
@@ -463,3 +560,4 @@ text = "Next"
 [connection signal="pressed" from="Story2/Next" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Story3/Next2" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Story4/Next3" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Ending1/Credits" to="." method="_on_credits_pressed"]
