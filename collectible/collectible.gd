@@ -1,8 +1,11 @@
 class_name Collectible
 extends Area2D
 
+@export var pickup_text : String
+
 var tw : Tween
 var level : Level
+var pickup_text_scene = preload("res://collectible/pickup_text.tscn")
 
 func _ready():
 	level = GameManager.get_level()
@@ -12,8 +15,8 @@ func _ready():
 
 func play_hover():
 	tw = create_tween()
-	tw.tween_property(%Sprite, "position:y", 2.0, 2.0).set_trans(Tween.TRANS_SINE)
-	tw.tween_property(%Sprite, "position:y", -2.0, 2.0).set_trans(Tween.TRANS_SINE)
+	tw.tween_property(%Sprite, "position:y", 4.0, 2.0).set_trans(Tween.TRANS_SINE)
+	tw.tween_property(%Sprite, "position:y", -4.0, 2.0).set_trans(Tween.TRANS_SINE)
 	tw.set_loops()
 	tw.pause()
 	
@@ -30,4 +33,8 @@ func show_glow(v : bool = true):
 	$Glow.visible = v
 
 func _on_pickup(body : Node2D):
-	pass
+	var o = pickup_text_scene.instantiate()
+	get_parent().add_child(o)
+	o.position = global_position
+	o.get_node("Label").text = pickup_text
+	o.get_node("Timer").timeout.connect(o.queue_free)

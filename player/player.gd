@@ -33,7 +33,7 @@ var jumps = default_jumps
 var airtime : float = 0.0
 var did_walljump : bool = false
 
-@onready var state_label := get_node("%StateLabel") as Label
+#@onready var state_label := get_node("%StateLabel") as Label
 @onready var right_raycast := get_node("RightRaycast") as RayCast2D
 @onready var left_raycast := get_node("LeftRaycast") as RayCast2D
 @onready var anim := $AnimationPlayer as AnimationPlayer
@@ -44,6 +44,8 @@ func _ready():
 	level = GameManager.get_level()
 	if is_instance_valid(level):
 		jumped.connect(func(): level.add_time(-1.0))
+		level.time_up.connect(die)
+		level.win.connect(disable)
 	recalc_physics()
 	if not is_instance_valid(level):
 		push_warning("Player is not connected to level")
@@ -91,5 +93,16 @@ func _unhandled_input(event):
 		level.manual_advance = false
 
 func set_state_label(text : String):
-	state_label.text = text
-#	pass
+#	state_label.text = text
+	pass
+
+func die():
+	%Sprite2D.visible = false
+	%Explode.visible = true
+	%Explode.play("default")
+	%Explode.animation_finished.connect(%Explode.pause)
+	$StateMachine.transition_to("None")
+
+func disable():
+	$StateMachine.transition_to("None")
+	anim.play("idle")

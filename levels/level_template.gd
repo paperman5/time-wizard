@@ -15,6 +15,7 @@ var time_paused := true
 var n_organ_parts : int = 0
 var parts_collected : int = 0
 var time_add_marker = preload("res://components/time_add_marker.tscn")
+var lost : bool = false
 
 @onready var pt = track.get_node_or_null("PositionTracker") as PositionTracker
 @onready var gameover = get_node("%GameoverScreen") as Control
@@ -23,6 +24,8 @@ var time_add_marker = preload("res://components/time_add_marker.tscn")
 
 signal time_advance(delta : float)
 signal part_collected(n_parts : int)
+signal time_up()
+signal win()
 
 func _ready():
 	for smoothing in get_tree().get_nodes_in_group("smoothing"):
@@ -44,8 +47,11 @@ func _process(delta):
 		time_speed = clamp(time_speed, 0.0, 1.0)
 		delta_mod = delta * time_speed
 		
-		if used_time >= time_limit:
+		if used_time >= time_limit and not lost:
+			time_up.emit()
 			show_gameover()
+			lost = true
+			pause_time()
 		else:
 			used_time += delta_mod
 			time_advance.emit(delta_mod)
@@ -69,6 +75,7 @@ func show_success():
 
 func pause_time(length : float = 0.0):
 	time_paused = true
+	time_speed = 0.0
 	if not is_zero_approx(length):
 		pause_timer.start(length)
 		pause_timer.timeout.connect(resume_time, CONNECT_ONE_SHOT)
@@ -76,11 +83,13 @@ func pause_time(length : float = 0.0):
 func resume_time():
 	time_paused = false
 
-func collect_organ_part():
+func collect_organ_part(organ_part : OrganPart):
 	parts_collected += 1
 	part_collected.emit(parts_collected)
 	if parts_collected == n_organ_parts:
 		show_success()
+		win.emit()
+	organ_part.queue_free()
 
 func add_time(amount_sec : float):
 	used_time -= amount_sec
