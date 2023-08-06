@@ -52,6 +52,7 @@ func _process(delta):
 			show_gameover()
 			lost = true
 			pause_time()
+			$Fail.play()
 		else:
 			used_time += delta_mod
 			time_advance.emit(delta_mod)
@@ -89,6 +90,7 @@ func collect_organ_part(organ_part : OrganPart):
 	if parts_collected == n_organ_parts:
 		show_success()
 		win.emit()
+		$Fanfare.play()
 	organ_part.queue_free()
 
 func add_time(amount_sec : float):

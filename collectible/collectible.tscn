@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dp04nxymkv8ou"]
+[gd_scene load_steps=7 format=3 uid="uid://dp04nxymkv8ou"]
 
 [ext_resource type="Script" path="res://collectible/collectible.gd" id="1_ybsyl"]
+[ext_resource type="FontFile" uid="uid://di7xg4466skug" path="res://hope_gold.ttf" id="2_0dxtk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jur8s"]
 radius = 4.0
@@ -35,3 +36,14 @@ visible = false
 show_behind_parent = true
 mesh = SubResource("QuadMesh_o2o1c")
 texture = SubResource("GradientTexture2D_nt7ys")
+
+[node name="ExtraLabel" type="Label" parent="Sprite"]
+offset_left = 8.0
+offset_top = -4.0
+offset_right = 16.0
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("2_0dxtk")
+theme_override_font_sizes/font_size = 24

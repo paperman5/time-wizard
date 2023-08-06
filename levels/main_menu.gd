@@ -5,6 +5,11 @@ extends Control
 var story : int = 0
 var max_story : int = 4
 
+func _ready():
+	for c in get_children():
+		c.hide()
+	%Menu.show()
+
 func _on_play_pressed():
 	%Menu.hide()
 	%Credits.hide()

@@ -69,6 +69,10 @@ func jump(reduce_jumps : bool = true, type : String = 'ground'):
 			jumps -= 1
 		jumped.emit()
 		anim.play("jump")
+		$JumpSound.play()
+
+func play_pickup_sound():
+	$PickupSound.play()
 
 func reset_jumps():
 	jumps = default_jumps

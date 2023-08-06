@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjjo4pl5ohidd"]
+[gd_scene load_steps=8 format=3 uid="uid://cjjo4pl5ohidd"]
 
 [ext_resource type="PackedScene" uid="uid://d0k0akqnvj75k" path="res://levels/level_template.tscn" id="1_vqo2n"]
 [ext_resource type="PackedScene" uid="uid://rusm6h061nwd" path="res://player/player.tscn" id="2_iq4gq"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://diimf5x37qpwr" path="res://levels/moving_platform.tscn" id="4_xq8iw"]
 [ext_resource type="PackedScene" uid="uid://br4clqtuu44ek" path="res://collectible/pause_time.tscn" id="5_toy1m"]
 [ext_resource type="PackedScene" uid="uid://t77eynjeapwt" path="res://collectible/organ_part.tscn" id="6_23vua"]
+[ext_resource type="Texture2D" uid="uid://buwyekkoqadky" path="res://down_glyph.png" id="7_c3c4t"]
 
 [node name="Level03" node_paths=PackedStringArray("track") instance=ExtResource("1_vqo2n")]
 time_limit = 8.5
@@ -47,7 +48,12 @@ position = Vector2(97, 221)
 pause_length = 5.0
 
 [node name="OrganPart" parent="." index="8" instance=ExtResource("6_23vua")]
-position = Vector2(865, -104)
+position = Vector2(865, -123)
+
+[node name="DownGlyph" type="Sprite2D" parent="." index="11"]
+position = Vector2(680, 119)
+scale = Vector2(2, 2)
+texture = ExtResource("7_c3c4t")
 
 [editable path="MovingPlatform"]
 [editable path="MovingPlatform2"]

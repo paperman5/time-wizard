@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0k0akqnvj75k"]
+[gd_scene load_steps=6 format=3 uid="uid://d0k0akqnvj75k"]
 
 [ext_resource type="Script" path="res://levels/level_template.gd" id="1_qrqul"]
 [ext_resource type="PackedScene" uid="uid://0b1h0djp1cw7" path="res://components/timer_display.tscn" id="2_gehn1"]
 [ext_resource type="TileSet" uid="uid://bcjxdlrju53pq" path="res://levels/level_tile_set.tres" id="3_flnaw"]
+[ext_resource type="AudioStream" uid="uid://p5gjmv1lgv2d" path="res://sfx/fanfare-46385.mp3" id="4_a32ih"]
+[ext_resource type="AudioStream" uid="uid://dtuw38hx5ocnm" path="res://sfx/medium-explosion-40472.mp3" id="5_kwndl"]
 
 [node name="LevelTemplate" type="Node2D" node_paths=PackedStringArray("timer_display")]
 script = ExtResource("1_qrqul")
@@ -123,6 +125,12 @@ layer_0/modulate = Color(0, 0, 0, 1)
 
 [node name="PauseTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Fanfare" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_a32ih")
+
+[node name="Fail" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_kwndl")
 
 [connection signal="pressed" from="UI/GameoverScreen/VBoxContainer/Retry" to="." method="_on_retry_pressed"]
 [connection signal="pressed" from="UI/GameoverScreen/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

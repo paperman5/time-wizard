@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://rusm6h061nwd"]
+[gd_scene load_steps=38 format=3 uid="uid://rusm6h061nwd"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_sy366"]
 [ext_resource type="Script" path="res://addons/smoothing/smoothing_2d.gd" id="2_huk2c"]
@@ -11,6 +11,10 @@
 [ext_resource type="Script" path="res://player/statemachine/air.gd" id="8_tt7fy"]
 [ext_resource type="Script" path="res://player/statemachine/wall.gd" id="9_vis76"]
 [ext_resource type="Script" path="res://player/statemachine/none.gd" id="11_ga1e4"]
+[ext_resource type="AudioStream" uid="uid://c1sywn3nx6uy0" path="res://sfx/jump.wav" id="12_fv0bp"]
+[ext_resource type="AudioStream" uid="uid://bjngeg731wkpw" path="res://sfx/powerup1.wav" id="13_qeinh"]
+[ext_resource type="AudioStream" uid="uid://c6gppoekkagqa" path="res://sfx/powerup2.wav" id="14_yrw7m"]
+[ext_resource type="AudioStream" uid="uid://km0o0x741p7h" path="res://sfx/powerup3.wav" id="15_sjhs3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s5qam"]
 atlas = ExtResource("4_k3gmp")
@@ -237,6 +241,24 @@ _data = {
 "wall_cling": SubResource("Animation_l56wh")
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_l1kbp"]
+streams_count = 1
+random_pitch = 1.05
+random_volume_offset_db = 0.0
+stream_0/stream = ExtResource("12_fv0bp")
+stream_0/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ydei5"]
+streams_count = 3
+random_pitch = 1.02
+random_volume_offset_db = 0.0
+stream_0/stream = ExtResource("13_qeinh")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("14_yrw7m")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("15_sjhs3")
+stream_2/weight = 1.0
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 7
@@ -307,3 +329,13 @@ autoplay = "idle"
 libraries = {
 "": SubResource("AnimationLibrary_w44da")
 }
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_l1kbp")
+volume_db = 3.429
+bus = &"SFX"
+
+[node name="PickupSound" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_ydei5")
+volume_db = -2.857
+bus = &"SFX"
